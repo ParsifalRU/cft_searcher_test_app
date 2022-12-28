@@ -46,8 +46,6 @@ Some screenshots:
 <img align="center" src="https://user-images.githubusercontent.com/109204462/209797241-f4c9e89a-4d69-41a2-aa1d-962cf963ed13.png" height="400" /></a>
 
 
-<img align="center" src="https://user-images.githubusercontent.com/109204462/209796998-8a3564db-b4dd-4668-b10a-0660e808ec9b.png" height="400" /></a>
-
 How to install:
 -
 [bin_searcher_app.zip](https://github.com/ParsifalRU/cft_searcher_test_app/files/10313642/bin_searcher_app.zip)
