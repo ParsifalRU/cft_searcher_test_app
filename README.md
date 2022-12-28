@@ -28,8 +28,7 @@ Functionality used:
 
 
 Some screenshots:
-
-
+-
 <img align="center" src="https://user-images.githubusercontent.com/109204462/209796209-c9442180-6669-4b34-9227-61672a598256.png" height="400" /></a>
 
 <img align="center" src="https://user-images.githubusercontent.com/109204462/209796528-5a42260d-5fc7-4fc1-85cf-c79ca1974d1d.png" height="400" /></a>
