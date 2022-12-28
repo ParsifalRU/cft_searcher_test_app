@@ -23,7 +23,7 @@ class MainFragment : Fragment() {
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         if (savedInstanceState == null){
             binding = FragmentMainBinding.inflate(inflater, container, false)
         }
@@ -48,7 +48,6 @@ class MainFragment : Fragment() {
                     viewModel.searchCardInfo((activity?.application as? BinApp)?.binApi, binding.searchView.query.toString())
                     viewModel.livedataStatus.observe(viewLifecycleOwner) { e ->
                         if (e == "onSuccess"){
-                            binding.listView.visibility = View.GONE
                             viewModel.addDB(requireContext(), binding.searchView.query.toString())
                             val bundle = Bundle()
                             bundle.putParcelable("DataModel", viewModel.liveData.value)
@@ -82,12 +81,6 @@ class MainFragment : Fragment() {
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         viewModel.readDB(requireContext())
         val arrayList = arrayListOf<String>()
-        viewModel.livedataDB.observe(viewLifecycleOwner) {array -> arrayList.addAll(array)}
-
-        view?.setOnClickListener{
-            binding.listView.visibility = View.GONE
-        }
-
         val adapter = ArrayAdapter(requireContext().applicationContext, android.R.layout.simple_list_item_1, arrayList)
         binding.searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
             override fun onQueryTextSubmit(p0: String?): Boolean {
@@ -99,11 +92,14 @@ class MainFragment : Fragment() {
             }
             override fun onQueryTextChange(p0: String?): Boolean {
                 adapter.filter.filter(p0)
-                binding.listView.visibility = View.VISIBLE
                 return false
             }
         })
         binding.listView.adapter = adapter
+
+        viewModel.livedataDB.observe(viewLifecycleOwner) {array ->
+            arrayList.addAll(array)
+            adapter.notifyDataSetChanged()}
 
         binding.btnDelete.setOnClickListener{
             viewModel.deleteDB(requireContext())
@@ -111,6 +107,5 @@ class MainFragment : Fragment() {
             adapter.clear()
         }
     }
-
 }
 

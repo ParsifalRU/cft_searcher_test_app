@@ -6,7 +6,6 @@ import android.database.Cursor
 import android.database.sqlite.SQLiteDatabase
 import android.database.sqlite.SQLiteOpenHelper
 import android.provider.BaseColumns
-import android.util.Log
 import io.reactivex.rxjava3.core.Single
 
 class DataBase(context: Context): SQLiteOpenHelper(context, DbConfig.DATABASE_NAME, null, DbConfig.DATABASE_VERSION) {
@@ -31,7 +30,6 @@ class DataBase(context: Context): SQLiteOpenHelper(context, DbConfig.DATABASE_NA
             cv.put(DbConfig.COLUMN_NAME_0, hint)
             db.insert(DbConfig.TABLE_NAME, null, cv)
             val cursor = db.query(DbConfig.TABLE_NAME, null, null, null, null, null, null)
-            Log.d("LOGTAG", "БД $cursor")
             cursor(cursor)
             cursor.close()
             db.close()
@@ -40,7 +38,7 @@ class DataBase(context: Context): SQLiteOpenHelper(context, DbConfig.DATABASE_NA
     }
 
     fun delete(): Single<String> {
-        return Single.create { subscriber ->
+        return Single.create {
             val db = this.writableDatabase
             db.delete(DbConfig.TABLE_NAME, null, null)
             db.close()
@@ -61,19 +59,13 @@ class DataBase(context: Context): SQLiteOpenHelper(context, DbConfig.DATABASE_NA
     private fun cursor(cursor: Cursor){
 
         if (cursor.moveToFirst()) {
-            val idColIndex = cursor.getColumnIndex(BaseColumns._ID)
             val col0ColIndex = cursor.getColumnIndex(DbConfig.COLUMN_NAME_0)
             do {
-                val colInd = cursor.getInt(idColIndex)
                 val col0 = cursor.getString(col0ColIndex)
                 allHint.add(col0)
             } while (cursor.moveToNext())
-
-        } else
-            Log.d("LOGTAG","$allHint")
-
+        }
     }
-
 }
 
 private object DbConfig{

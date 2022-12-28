@@ -4,7 +4,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="clear_old_request">Стереть старые запросы</string>
     <string name="search">Поиск</string>
-    <string name="input_your_bin">Введите ваш БИН:</string>
+    <string name="input_your_bin">Введите ваш БИН (8цифр):</string>
     <string name="title">Определение информации о карточной платежной системе</string>
     <string name="phone">Телефон:</string>
     <string name="name">Название:</string>
